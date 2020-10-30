@@ -16,8 +16,9 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
+  {!! Html::style('public/admin/css/select2.min.css') !!}
   {!! Html::style('public/admin/css/sb-admin-2.min.css') !!}
-  @yield('style')
+  @yield('stylesheet')
 
 </head>
 
@@ -49,10 +50,50 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider">
+@if(Auth::user()->admin==1)
+      <!-- Nav Item - Tables -->
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('/admin-panel')}}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Admin Dashboard</span></a>
+      </li>
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <i class="fas fa-fw fa-shopping-cart"></i>
+          <span>Product</span>
+        </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{url('/products/create')}}">New Product</a>
+            <a class="collapse-item" href="{{url('/products')}}">All Product</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/sendMoney') }}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Send Money</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/withdrawWetting') }}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Withdraw Money</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/allMemberList') }}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Member List</span></a>
+      </li>
+@endif      
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Interface
+        User
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
@@ -64,74 +105,28 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Wallet</h6>
-            <a class="collapse-item" href="buttons.html">Widthraw wallet</a>
-            <a class="collapse-item" href="cards.html">Shopping wallet</a>
-            <a class="collapse-item" href="cards.html">Register wallet</a>
-            <a class="collapse-item" href="cards.html">Refer & generation bonus walle</a>
-            <a class="collapse-item" href="cards.html">Auto board wallet</a>
-            <a class="collapse-item" href="cards.html">Rank wallet</a>
+            <a class="collapse-item" href="{{ url('/myWallet/widthrawWallet')}}">Widthraw wallet</a>
+            <a class="collapse-item" href="{{ url('/myWallet/shoppingWallet')}}">Shopping wallet</a>
+            <a class="collapse-item" href="{{ url('/myWallet/registerWallet')}}">Register wallet</a>
+            <a class="collapse-item" href="{{ url('/myWallet/refferWallet')}}">Refer & generation bonus wallet</a>
+            <a class="collapse-item" href="{{ url('/myWallet/autoWoardWallet')}}">Auto board wallet</a>
+            <a class="collapse-item" href="{{ url('/myWallet/rankWallet')}}">Rank wallet</a>
           </div>
         </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Addons
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item active" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{ url('/memberList') }}">
           <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+          <span>Referral List</span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/levelTree') }}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Level Tree</span></a>
+      </li>
+
+      
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -252,8 +247,9 @@
     {!! Html::script('public/admin/vendor/jquery/jquery.min.js') !!}
     {!! Html::script('public/admin/vendor/bootstrap/js/bootstrap.bundle.min.js') !!}
     {!! Html::script('public/admin/vendor/jquery-easing/jquery.easing.min.js') !!}
+    {!! Html::script('public/admin/js/select2.min.js') !!}
     {!! Html::script('public/admin/js/sb-admin-2.min.js') !!}
-@yield('script')
+@yield('scripts')
 
 </body>
 

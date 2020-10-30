@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\ProCat;
 use App\Order;
 use Session;
 use Auth;
@@ -28,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $cats = ProCat::all();
+        return view('admin.products.create',compact('cats'));
     }
 
     /**
@@ -40,12 +42,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, array(
-            'product_name'=>'required|max:255',
+            'title'=>'required|max:255',
             //'cat_id'=>'required'
             ));
 
         $data = new Product;
-        $data->product_name = $request->product_name;
+        $data->title = $request->title;
+        $data->status = 0;
         $data->user_id = Auth::user()->id;
         $data->save();
         return redirect()->route('products.edit',$data->id);
@@ -61,10 +64,10 @@ class ProductController extends Controller
 
     public function productHide($id){
         $data = Product::find($id);
-        if($data->publication_status==0){
-            $data->publication_status = 1;
+        if($data->status==0){
+            $data->status = 1;
         }else{
-            $data->publication_status = 0;
+            $data->status = 0;
         }
         
         $data->save();
@@ -86,46 +89,40 @@ class ProductController extends Controller
         return redirect()->route('productDelevery');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('admin.products.edit')->withProduct($product);
+        $cat = ProCat::all();
+        $cats=array();
+        foreach ($cat as $value) {
+            $cats[$value->id] = $value->title;
+        }
+        return view('admin.products.edit',compact('product','cats'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $this->validate($request, array(
-            'product_name'=>'required|max:255',
+            'title'=>'required|max:255',
             'price'=>'numeric|required',
-            'pv'=>'numeric|required',
+            'cat_id'=>'numeric|required',
             'description'=>'required',
             'photo'=>'nullable|image:max:1024',
             ));
 
         $data = Product::find($id);
-        $data->product_name = $request->product_name;
+        $data->title = $request->title;
         $data->price = $request->price;
-        $data->pv = $request->pv;
+        $data->cat_id = $request->cat_id;
         $data->reduced_price = $request->reduced_price;
         $data->description = $request->description;
-        $data->publication_status = 1;
+        $data->status = 1;
         $image = $request->file('photo');
         if ($image) {
 
-            $old_image_path = public_path().'/upload/product/'.$data->photo;
+            $old_image_path = public_path().'\upload\product\\'.$data->photo;
                 if(file_exists($old_image_path)) {
                 //dd($old_image_path);exit;
                   @unlink($old_image_path);

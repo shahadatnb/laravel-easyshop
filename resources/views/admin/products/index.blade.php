@@ -1,7 +1,5 @@
-@extends('layouts.admin-master')
+@extends('layouts.master')
 @section('stylesheet')
-  {!! Html::style('public/plugins/select2/select2.min.css') !!}
-
   <style>
     form.delete {
   display: inline;
@@ -35,18 +33,18 @@
               <th>ID</th>
               <th>Product</th>
               <th>Price</th>
-              <th>PV</th>
+              <th>Category</th>
               <th>Action</th>
             </tr>
             @foreach ($products as $product)
             <tr>
               <td>{{ $product->id }}</td>
-              <td>{{ $product->product_name }}</td>
+              <td>{{ $product->title }}</td>
               <td>{{ $product->price }}</td>
-              <td>{{ $product->pv }}</td>
+              <td>@if($product->cat_id != null ){{ $product->cat->title }}@endif</td>
               <td>
-                <a class="btn btn-success btn-xs" href="{{ route('products.show',$product->id) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
-                <a class="btn btn-success btn-xs" href="{{ route('products.edit',$product->id) }}"><span class="glyphicon glyphicon-pencil"></span>  Edit</a>
+                <a class="btn btn-success btn-xs" href="{{ route('products.show',$product->id) }}"><i class="fas fa-eye"></i></a>
+                <a class="btn btn-success btn-xs" href="{{ route('products.edit',$product->id) }}"><i class="fas fa-edit"></i>  Edit</a>
                 
                   @if($product->publication_status==0)
                     <a class="btn btn-primary btn-xs" href="{{ route('productHide',$product->id) }}">Show</a>
@@ -57,7 +55,7 @@
                 <form class="delete" action="{{ route('products.destroy',$product->id) }}" method="post">
                   {{ csrf_field() }}
                   {{ method_field('DELETE') }}
-                  <button type="submit" class="btn btn-danger btn-xs" href='{{ $product->id }}' onclick="return confirm('Are You Sure To Delete This Item?')"><span class="glyphicon glyphicon-trash"></span></button>
+                  <button type="submit" class="btn btn-danger btn-xs" href='{{ $product->id }}' onclick="return confirm('Are You Sure To Delete This Item?')"><i class="fas fa-trash-alt"></i></button>
               </form>
               </td>
             </tr>
@@ -77,7 +75,6 @@
   </div>
  @endsection
     @section('scripts')
-      {!! Html::script('public/plugins/select2/select2.min.js') !!}
       <script>
         $('.select2').select2();
       </script>

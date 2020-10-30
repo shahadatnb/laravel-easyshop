@@ -1,20 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Traits\Wallet;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use App\Traits\Wallets;
 use App\AdminWallet;
-use App\CurrentWallet;
-use App\PointValue;
+use App\Wallet;
 use App\Product;
-use App\MyWallet;
 use App\Order;
+use App\User;
 use Session;
 use Auth;
 
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
-{   use Wallet;
+{   use Wallets;
     /**
      * Display a listing of the resource.
      *
@@ -37,13 +38,20 @@ class OrderController extends Controller
     public function buyPackSubmit(Request $request)
     {
         $this->validate($request, array(
+            'name' => 'required|string|max:255',
+            'username' => 'required|alpha_dash|max:30|unique:users',
+            'email' => 'required|string|email|max:50',
+            'password' => 'required|string|min:6|confirmed',
             'mobile' => 'required',
+            'referralId' => 'required|exists:users,id',
+            'placementId' => 'required|exists:users,id',
+
             'kuriar' => 'required',
             'address' => 'required',
             'product_id' => 'required',
         ));
         $product = Product::find($request->product_id);
-        if($this->currentBalance(Auth::user()->id) >= $product->price){
+        if($this->balance(Auth::user()->id,'register-wallet') >= $product->price){
             $order = new Order;
             $order->user_id = Auth::user()->id;
             $order->mobile = $request->mobile;
@@ -52,16 +60,28 @@ class OrderController extends Controller
             $order->product_id = $request->product_id;
             $order->save();
 
-            $data1 = new CurrentWallet;
+            $data1 = new Wallet;
             $data1->user_id = Auth::user()->id;
             $data1->payment = $product->price;
             $data1->remark = 'Buy Product #'.$order->id;
+            $data1->wType = 'registerWallet';
             $data1->save();
 
-            $data = new PointValue;
+            $data = new Wallet;
             $data->user_id = Auth::user()->id;
-            $data->receipt = $product->pv;
+            $data->receipt = $product->price/10;
             $data->remark = 'Buy Product';
+            $data->wType = 'refferWallet';
+            $data->save();
+
+            $data = new User;
+            $data->name = $request->name;
+            $data->username = $request->username;
+            $data->email = $request->email;
+            $data->mobile = $request->mobile;
+            $data->referralId = $request->referralId;
+            $data->placementId = $request->placementId;
+            $data->password = bcrypt($request->password);
             $data->save();
 
             //$this->spotBonus(Auth::user()->referralId,$product->pv);

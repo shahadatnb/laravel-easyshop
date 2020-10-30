@@ -36,8 +36,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/upgrateStandrad', 'HomeController@upgrateStandrad')->name('upgrateStandrad');
 
 	//Route::post('/myWalletToCurrent', 'HomeController@myWalletToCurrent')->name('myWalletToCurrent');
-	Route::get('/currentWallet', 'HomeController@currentWallet')->name('currentWallet');
-	Route::get('/earnWallet', 'HomeController@earnWallet')->name('earnWallet');
+	Route::get('/myWallet/{wallet}', 'HomeController@myWallet')->name('myWallet');
 	Route::get('/memberList', 'HomeController@memberList')->name('memberList');
 	Route::get('/member/id/{id}', 'HomeController@memberListId')->name('memberListId');
 	Route::get('/levelTree', 'HomeController@levelTree')->name('levelTree');
@@ -82,8 +81,6 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::get('/admin-panel', 'AdminController@index')->name('admin.panel');
 	Route::get('/allMemberList', 'ProfileController@allMemberList')->name('allMemberList');
 	Route::get('/profileView/{id}', 'ProfileController@profileView')->name('profileView');
-	Route::post('/smartLinkPost/{id}', 'AdminController@smartLinkPost')->name('smartLinkPost');
-	Route::get('/smartLinkDelete/{id}', 'AdminController@smartLinkDelete')->name('smartLinkDelete');
 
 	Route::get('/pin', 'AdminController@pin')->name('pin');
 	Route::get('/pingenarate', 'AdminController@pingenarate')->name('pingenarate');
@@ -93,12 +90,12 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::get('/withdrawConfirm/{id}', 'AdminController@withdrawConfirm')->name('withdrawConfirm');
 	Route::get('/sendMoney', 'AdminController@sendMoney')->name('sendMoney');
 	Route::post('/sendMoney', 'AdminController@postSendMoney')->name('sendMoney');
-	Route::post('/sendToIncome', 'AdminController@sendToIncome')->name('sendToIncome');
 	Route::post('/paymentMoney', 'AdminController@paymentMoney')->name('paymentMoney');
 
 	Route::post('/changePassAdmin', 'ProfileController@changePassAdmin')->name('changePassAdmin');
 
-	Route::resource('ptcs','PtcController');
+	Route::resource('products','ProductController');
+	Route::get('/productHide/{id}', 'ProfileController@productHide')->name('productHide');	
 
 });
 

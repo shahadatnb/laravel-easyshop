@@ -1,8 +1,6 @@
-@extends('layouts.admin-master')
+@extends('layouts.master')
 @section('stylesheet')
-  {!! Html::style('public/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') !!}
-  {!! Html::style('public/plugins/select2/select2.min.css') !!}
-
+  {!! Html::style('public/admin/vendor/summernote/summernote.min.css') !!}
   <style>
     img{max-width: 100%}
     #image_row label {position: absolute;}
@@ -27,12 +25,13 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
+          @include('layouts._message')
           <div class="row">
             <div class="col-md-12">
-              {{ Form::label('product_name','Name') }}
-              {{ Form::text('product_name',null,['class'=>'form-control']) }} 
-              @if($errors->has('product_name'))
-                  <span class="help-block">{{ $errors->first('product_name') }}</span>
+              {{ Form::label('title','Title') }}
+              {{ Form::text('title',null,['class'=>'form-control']) }} 
+              @if($errors->has('title'))
+                  <span class="help-block">{{ $errors->first('title') }}</span>
               @endif             
             </div>
           </div>
@@ -45,10 +44,10 @@
               @endif 
             </div>
             <div class="col-md-6">
-              {{ Form::label('pv','PV') }}
-              {{ Form::text('pv',null,['class'=>'form-control']) }} 
-              @if($errors->has('pv'))
-                  <span class="help-block">{{ $errors->first('pv') }}</span>
+              {{ Form::label('cat_id','Product Category') }}
+              {{ Form::select('cat_id',$cats,null,['class'=>'form-control','placeholder'=>'Product Category']) }} 
+              @if($errors->has('cat_id'))
+                  <span class="help-block">{{ $errors->first('cat_id') }}</span>
               @endif 
             </div>
           </div>
@@ -71,7 +70,6 @@
             </div>
 
             <div class="col-md-6">
-            {{ Form::label('cat_id',' ') }}
               {{ Form::submit('Update', ['class'=>'btn btn-success btn-block']) }}
             </div>
           </div>
@@ -90,10 +88,8 @@
   </div>
  @endsection
     @section('scripts')
-      {!! Html::script('public/plugins/select2/select2.min.js') !!}
-    {!! Html::script('public/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') !!}
+    {!! Html::script('public/admin/vendor/summernote/summernote.min.js') !!}
       <script>
-        $('.select2').select2();
-        $(".textarea").wysihtml5();
+        $('.textarea').summernote();
       </script>
     @endsection

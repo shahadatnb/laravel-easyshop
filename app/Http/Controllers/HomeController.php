@@ -2,10 +2,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Traits\Wallet;
-use App\CurrentWallet;
-use App\EarnWallet;
-use App\PointValue;
+use App\Traits\Wallets;
+use App\Wallet;
 use App\AdminWallet;
 use App\UserPin;
 use App\User;
@@ -16,7 +14,7 @@ use DB;
 
 class HomeController extends Controller
 {
-    use Wallet;
+    use Wallets;
     private $withdrowAmt = 10;
     private $mBonus = 10;
     private $dayLimit = 200;
@@ -30,10 +28,8 @@ class HomeController extends Controller
     }
 
     public function index(){
-        //$transaction = CurrentWallet::where('user_id',Auth::user()->id)->latest()->paginate(50);
-        $currentBalance = $this->currentBalance(Auth::user()->id);
-        $earnBalance = $this->earnBalance(Auth::user()->id);
-        return view('pages.dashboard',compact('currentBalance','earnBalance'));
+       
+        return view('pages.dashboard');
     }
 
     public function memberList()
@@ -101,25 +97,15 @@ class HomeController extends Controller
     }
 
 
-    public function currentWallet()
+    public function myWallet($wallet)
     {
-        //$member = $this->where('referralId', Auth::user()->id)->where('premium', 0)->get();
-        $transaction = CurrentWallet::where('user_id',Auth::user()->id)->latest()->take(10)->get();
-
-        $balance = $this->currentBalance(Auth::user()->id);
-        return view('pages.currentWallet')->withBalance($balance)->withTransaction($transaction);
+        $transaction = $this->listBalance(Auth::user()->id,$wallet);
+        $balance = $this->balance(Auth::user()->id,$wallet);
+        $walletName = $this->wallets[$wallet];
+        return view('wallet.'.$wallet,compact('transaction','balance','walletName'));
     }
     
 
-
-    public function earnWallet()
-    {
-        //$member = $this->where('referralId', Auth::user()->id)->where('premium', 0)->get();
-        $transaction = EarnWallet::where('user_id',Auth::user()->id)->latest()->take(10)->get();
-
-        $balance = $this->earnBalance(Auth::user()->id);
-        return view('pages.earnWallet')->withBalance($balance)->withTransaction($transaction);
-    }
 
 
 /* ################# Aprove ID     Premium        #########################*/

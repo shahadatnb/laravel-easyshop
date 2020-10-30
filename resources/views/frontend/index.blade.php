@@ -10,115 +10,29 @@
     <div class="container">
       <!-- HEADER -->
       <div class="col-lg-8 col-xl-7 mx-auto text-center mb-5">
-        <p class="block__pre-title mb-2">WHY CHOOSING US</p>
-        <h1 class="block__title mb-3">Easy Process With <span class="highlight">Best Features</span></h1>
-        <p class="block__paragraph mb-0">
-
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s
-          standard
-        </p>
+        <h1 class="block__title mb-3">Products</h1>
+        {{-- <p class="block__paragraph mb-0">standard</p> --}}
       </div>
       <div class="row align-items-center flex-column-reverse flex-lg-row px-2">
-        <!-- LEFT CONTENT -->
-        <div class="col-lg-4">
-          <div class="card-2 d-flex flex-row flex-lg-row-reverse">
-            <div>
-              <span class="card-2__symbol mx-auto">
-                <i class="fas fa-heartbeat"></i>
-              </span>
-            </div>
-            <div class="px-2"></div>
-            <div>
-              <h3 class="card-2__title mb-2">Heart Rate Monitor</h3>
-              <p class="card-2__paragraph">
-                Lorem Ipsum is simply dummy text of
-                the printing and typesetting industry.
-              </p>
-            </div>
-          </div>
-          <div class="card-2 d-flex flex-row flex-lg-row-reverse">
-            <div>
-              <span class="card-2__symbol mx-auto">
-                <i class="fas fa-briefcase-medical"></i>
-              </span>
-            </div>
-            <div class="px-2"></div>
-            <div>
-              <h3 class="card-2__title mb-2">Blood Pressure Manager</h3>
-              <p class="card-2__paragraph">
-                Lorem Ipsum is simply dummy text of
-                the printing and typesetting industry.
-              </p>
+        @foreach($products as $item)
+          <div class="col-md-6 col-lg-3">
+
+          <div class="card">
+            @if ($item->photo)
+            <a href="{{url('/page',$item->id)}}"><img src="{{ url('/').'/public/upload/product/'.$item->photo}}" alt="{{$item->title}}" class="card-img-top"></a>
+            @endif
+            <div class="card-body">
+              @if($item->cat_id != null )
+              <div class="meta-cat"><a href="#">{{ $item->cat->title }}</a></div>
+              @endif
+              <h2 class="card-title"><a href="{{url('/page',$item->id)}}">{{$item->title}}</a></h2>
+              <p class="card-text">{!! str_limit(strip_tags($item->description),120) !!}</p>
+              <a href="{{route('buyPack',$item->id )}}" class="btn btn-sm btn-success">Buy now</a>
             </div>
           </div>
-          <div class="card-2 d-flex flex-row flex-lg-row-reverse">
-            <div>
-              <span class="card-2__symbol mx-auto">
-                <i class="fas fa-bell"></i>
-              </span>
-            </div>
-            <div class="px-2"></div>
-            <div>
-              <h3 class="card-2__title mb-2">Alarm Alert</h3>
-              <p class="card-2__paragraph">
-                Lorem Ipsum is simply dummy text of
-                the printing and typesetting industry.
-              </p>
-            </div>
-          </div>
+
         </div>
-        <!-- IMAGE -->
-        <div class="col-lg-4 my-5 text-center">
-          <img src="{{ url('/')}}/public/fontend/imgs/img-2.png" class="w-75">
-        </div>
-        <!-- RIGHT CONTENT -->
-        <div class="col-lg-4">
-          <div class="card-2 d-flex">
-            <div>
-              <span class="card-2__symbol mx-auto">
-                <i class="fas fa-map-marker-alt"></i>
-              </span>
-            </div>
-            <div class="px-2"></div>
-            <div>
-              <h3 class="card-2__title mb-2">Location Finder</h3>
-              <p class="card-2__paragraph">
-                Lorem Ipsum is simply dummy text of
-                the printing and typesetting industry.
-              </p>
-            </div>
-          </div>
-          <div class="card-2 d-flex">
-            <div>
-              <span class="card-2__symbol mx-auto">
-                <i class="fas fa-fingerprint"></i>
-              </span>
-            </div>
-            <div class="px-2"></div>
-            <div>
-              <h3 class="card-2__title mb-2">Fingerprint Lock</h3>
-              <p class="card-2__paragraph">
-                Lorem Ipsum is simply dummy text of
-                the printing and typesetting industry.
-              </p>
-            </div>
-          </div>
-          <div class="card-2 d-flex">
-            <div>
-              <span class="card-2__symbol mx-auto">
-                <i class="fas fa-mobile"></i>
-              </span>
-            </div>
-            <div class="px-2"></div>
-            <div>
-              <h3 class="card-2__title mb-2">Camera and Bluetooth</h3>
-              <p class="card-2__paragraph">
-                Lorem Ipsum is simply dummy text of
-                the printing and typesetting industry.
-              </p>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </div>

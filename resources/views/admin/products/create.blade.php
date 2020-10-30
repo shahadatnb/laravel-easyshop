@@ -1,16 +1,13 @@
-@extends('layouts.admin-master')
-@section('stylesheet')
-  {!! Html::style('public/plugins/select2/select2.min.css') !!}
-@endsection
+@extends('layouts.master')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>Ceeade Product</h1>
+      <h1>Ceade Product</h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Product</a></li>
-        <li class="active">Ceeade Product</li>
+        <li class="active">Ceade Product</li>
       </ol>
     </section>
 
@@ -20,12 +17,13 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
+          @include('layouts._message')
           <div class="row">
             <div class="col-md-8">
-              {{ Form::label('product_name','Name') }}
-              {{ Form::text('product_name',null,['class'=>'form-control']) }} 
-              @if($errors->has('product_name'))
-                  <span class="help-block">{{ $errors->first('product_name') }}</span>
+              {{ Form::label('title','Title') }}
+              {{ Form::text('title',null,['class'=>'form-control']) }} 
+              @if($errors->has('title'))
+                  <span class="help-block">{{ $errors->first('title') }}</span>
               @endif             
             </div>
             <div class="col-md-4">
@@ -50,9 +48,3 @@
     <!-- /.content -->
   </div>
  @endsection
-    @section('scripts')
-      {!! Html::script('public/plugins/select2/select2.min.js') !!}
-      <script>
-        $('.select2').select2();
-      </script>
-    @endsection

@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use App\Traits\Wallet;
-use App\CurrentWallet;
-use App\EarnWallet;
+use App\Traits\Wallets;
+use App\Wallet;
 use App\User;
 use Session;
 use Auth;
 
 class ProfileController extends Controller
 {
-    use Wallet;
+    use Wallets;
 
     public function index(){
         return view('profile.profile');
