@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email','mobile', 'hand', 'referralId', 'referralId', 'password','pin',
+        'name', 'username', 'email','mobile', 'hand', 'referralId', 'placementId', 'password','pin',
     ];
 
     private $return_count = 0;
@@ -35,18 +35,18 @@ class User extends Authenticatable
 
 
     public function childs() {
-        return $this->hasMany('App\User','referralId','id');//->orderBy('hand');
+        return $this->hasMany('App\User','placementId','id');//->orderBy('hand');
     }
 
     public static function nChilds($id) {
-        return User::where('referralId',$id)->get();
+        return User::where('placementId',$id)->get();
     }
 
 
     public static function myChild($id){
         global $count;
         $count = 0;
-        $child =  User::where('referralId',$id)->first(); //->pluck('id')
+        $child =  User::where('placementId',$id)->first(); //->pluck('id')
         if($child){
             $count = 1;
             if(count($child->childs)){
@@ -68,35 +68,12 @@ class User extends Authenticatable
         return $count;
     }
 
-    public static function myChildLR($id, $hand){
-        global $count;
-        $count = 0;
-        $child =  User::where('hand',$hand)->where('referralId',$id)->first(); //->pluck('id')
-        if($child){
-            $count = 1;
-            if(count($child->childs)){
-              $count = User::cChildLR($child->childs,$count);
-            }
-        }
-        return $count; 
-    }
 
-    public static function cChildLR($child,$count){
-        //dd($child);
-        foreach ($child as $member) { //dd($member->childs);//dd(count(User::nChilds($member->id)));            
-            global $count;
-            $count ++;
-            if(count($member->childs)){
-                    User::cChildLR($member->childs,$count);
-            }
-        }
-        return $count;
-    }
 
     public static function myChildOnlyPremium($id, $hand){
         global $count;
         $count = 0;
-        $child =  User::where('hand',$hand)->where('referralId',$id)->first(); //->pluck('id')
+        $child =  User::where('hand',$hand)->where('placementId',$id)->first(); //->pluck('id')
         if($child){            
             if($child->premium == 1 || $child->premium == 2){$count = 1;} // || $child->premium == 2
             if(count($child->childs) > 0){
@@ -130,7 +107,7 @@ class User extends Authenticatable
     public static function myChildPv($id, $hand){
         global $count;
         $count = 0;
-        $child =  User::where('hand',$hand)->where('referralId',$id)->first(); //->pluck('id')
+        $child =  User::where('hand',$hand)->where('placementId',$id)->first(); //->pluck('id')
         if($child){            
             if($child->premium == 1 || $child->premium == 2){$count = User::myPv($child->id);} // || $child->premium == 2
             if(count($child->childs) > 0){
@@ -155,7 +132,7 @@ class User extends Authenticatable
 
 
     public static function fff($id, $count){
-        if(count(User::where('referralId',$id)->get())){ //= count(User::nChilds($member->id));
+        if(count(User::where('placementId',$id)->get())){ //= count(User::nChilds($member->id));
                 $member = User::find($id);
                 User::cChild($member,$count);                    
             }
@@ -172,7 +149,7 @@ class User extends Authenticatable
     }
 
     function countChild($member,$count){
-        $members = User::where('referralId',$member)->get();
+        $members = User::where('placementId',$member)->get();
         foreach ($members as $member) {
             if(count($member->childs)){
                 $count += count($member->childs);
@@ -198,7 +175,7 @@ class User extends Authenticatable
 
     public function defth() {
 
-        return $this->hasMany('App\User','referralId','id');
+        return $this->hasMany('App\User','placementId','id');
 
     }
 

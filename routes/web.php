@@ -95,7 +95,10 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::post('/changePassAdmin', 'ProfileController@changePassAdmin')->name('changePassAdmin');
 
 	Route::resource('products','ProductController');
-	Route::get('/productHide/{id}', 'ProfileController@productHide')->name('productHide');	
+	Route::get('/productHide/{id}', 'ProductController@productHide')->name('productHide');
+
+	Route::get('/productDelevery', 'ProductController@productDelevery')->name('productDelevery');
+	Route::get('/productDeleveryConfirm/{id}', 'ProductController@productDeleveryConfirm')->name('productDeleveryConfirm');
 
 });
 

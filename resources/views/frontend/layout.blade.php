@@ -25,6 +25,9 @@
     
   <!--Hero ====================================== -->
   <header class="hero container-fluid border-bottom">
+    <div class="alert alert-primary" role="alert">
+      <marquee behavior="" direction="">{{ settingValue('fontend_msg') }}</marquee>   
+    </div>
     <nav class="hero-nav container px-4 px-lg-0 mx-auto">
       <ul class="nav w-100 list-unstyled align-items-center p-0">
         <li class="hero-nav__item">
@@ -54,9 +57,9 @@
 	                  <a href="{{ url('/home') }}" class="hero-nav__link">Dashboard</a>
 	                </li>
                 @else
-	                <li class="hero-nav__item">
+	                {{-- <li class="hero-nav__item">
 	                  <a href="{{ url('/register') }}" class="hero-nav__link">Register</a>
-	                </li>
+	                </li> --}}
 	                <li class="hero-nav__item">
 	                  <a href="{{ url('/login') }}" class="hero-nav__link">Login</a>
 	                </li>

@@ -43,6 +43,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
+                  {{ Form::hidden('product_id',$product->id) }}
                   {{ Form::label('kuriar','Kuriar Service Name') }}
                   {{ Form::text('kuriar',null,['class'=>'form-control','required'=>'']) }}
                 </div>

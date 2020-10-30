@@ -37,7 +37,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');//guest
     }
 
     /**
@@ -53,13 +53,11 @@ class RegisterController extends Controller
             'username' => 'required|alpha_dash|max:30|unique:users',
             'email' => 'required|string|email|max:50',
             'password' => 'required|string|min:6|confirmed',
-            'mobile' => 'required|string|max:255',
-            //'skypeid' => 'required|string|max:40|unique:users',
-            'hand' => 'required|unique_with:users,referralId,hand',
-            'pin' => 'required|unique:users|exists:user_pins,pin|unique:users',
-            'referralId' => 'required|exists:users,id',
+            'mobile' => 'required',
+            'referralId' => 'required|unique_with|exists:users,id',
+            'placementId' => 'required|exists:users,id',
         ],[
-            'hand.unique_with' => 'This hand side is already used, please try another hand or another Placement ID',
+            'placementId.unique_with' => 'This referral Id already 4 times used, please try another referral ID'
         ]);
     }
 

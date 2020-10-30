@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      /*
       Validator::extend('unique_with', function ($attribute, $value, $parameters, $validator) {
         $request = request()->all();
 
@@ -39,6 +40,16 @@ class AppServiceProvider extends ServiceProvider
                 ->where($clauses)
                 ->exists();
     });
+*/
+
+    Validator::extend('unique_with', function ($attribute, $value, $parameters, $validator) {
+          $count = DB::table('users')->where('placementId', $value)->count();
+          if($count < 4){
+            return $count;
+          }
+          
+        });
+
     }
 
     /**

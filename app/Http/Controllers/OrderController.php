@@ -44,14 +44,16 @@ class OrderController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'mobile' => 'required',
             'referralId' => 'required|exists:users,id',
-            'placementId' => 'required|exists:users,id',
-
+            'placementId' => 'required|unique_with|exists:users,id',
             'kuriar' => 'required',
             'address' => 'required',
             'product_id' => 'required',
-        ));
+        ),[
+            'placementId.unique_with' => 'This referral Id already 4 times used, please try another referral ID'
+        ]);
+
         $product = Product::find($request->product_id);
-        if($this->balance(Auth::user()->id,'register-wallet') >= $product->price){
+        if($this->balance(Auth::user()->id,'registerWallet') >= $product->price){
             $order = new Order;
             $order->user_id = Auth::user()->id;
             $order->mobile = $request->mobile;
@@ -90,7 +92,7 @@ class OrderController extends Controller
             return redirect()->route('myOrder');
         }else{
             Session::flash('warning','Sorry, Your Balance Less then '.$product->price);
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
     }
 

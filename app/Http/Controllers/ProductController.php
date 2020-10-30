@@ -76,7 +76,7 @@ class ProductController extends Controller
 
     public function productDelevery()
     {
-        $orders = Order::latest()->paginate(10);
+        $orders = Order::latest()->paginate(20);
         return view('admin.products.productDelevery')->withOrders($orders);
     }
 
