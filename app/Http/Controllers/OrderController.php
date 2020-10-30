@@ -49,7 +49,7 @@ class OrderController extends Controller
             'address' => 'required',
             'product_id' => 'required',
         ),[
-            'placementId.unique_with' => 'This referral Id already 4 times used, please try another referral ID'
+            'placementId.unique_with' => 'This referral Id already 5 member registered, please try another referral ID'
         ]);
 
         $product = Product::find($request->product_id);
@@ -104,7 +104,7 @@ class OrderController extends Controller
      */
     public function myOrder()
     {
-        $orders = Order::where('user_id',Auth::user()->id)->get();
+        $orders = Order::where('user_id',Auth::user()->id)->latest()->paginate(20);
         return view('order.orderList',compact('orders'));
     }
 

@@ -24,6 +24,15 @@ trait Wallets
         return $balance;
     }
 
+    public function allBalance($id){
+
+        $balances = [];
+            foreach ($this->wallets as $key=>$value) {
+                $balances[$value] = $this->balance($id,$key);
+            }
+        return $balances;
+    }
+
     public function listBalance($id,$wType)
     {
         $transaction = Wallet::where('user_id',$id)->where('wType',$wType)->latest()->take(10)->get();

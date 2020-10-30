@@ -28,8 +28,8 @@ class HomeController extends Controller
     }
 
     public function index(){
-       
-        return view('pages.dashboard');
+       $wallets=$this->allBalance(Auth::user()->id);
+        return view('pages.dashboard',compact('wallets'));
     }
 
     public function memberList()

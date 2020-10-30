@@ -44,8 +44,9 @@ class AppServiceProvider extends ServiceProvider
 
     Validator::extend('unique_with', function ($attribute, $value, $parameters, $validator) {
           $count = DB::table('users')->where('placementId', $value)->count();
-          if($count < 4){
-            return $count;
+          //dd($count);exit;
+          if($count < 5){
+            return true;
           }
           
         });

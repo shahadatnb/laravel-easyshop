@@ -27,31 +27,31 @@
           <table class="table">
             <tr>
               <th>ID</th>
-              <th>Type</th>
+              {{-- <th>Type</th> --}}
               <th>Member Name</th>
               <th>Email</th>
               <th>Mobile</th>
               <th>R. ID</th>
+              <th>P. ID</th>
               <th>J. Date</th>
-              <th>Detail</th>
             </tr>
             @foreach ($members as $member)
             <tr>
               <td><a href="{{ route('profileView',$member->id) }}" target="_blank">{{ $member->id }}</a></td>
-              <td>
+              {{-- <td>
                 @if($member->premium == 1)
                   <span class="label label-info">Premium</span>
                 @elseif($member->premium == 2)
                   <span class="label label-success">Standrad</span>
                   <!-- <a href="{{url('/getpremium',$member->id)}}" class="btn btn-success btn-xs">Apprve</a> -->
                 @endif
-              </td>
+              </td> --}}
               <td>{{ $member->name }}</td>
               <td>{{ $member->email }}</td>
               <td>{{ $member->mobile }}</td>
               <td>{{ $member->referralId }}</td>
+              <td>{{ $member->placementId }}</td>
               <td>{{ $member->created_at->format('d M Y') }}</td>
-              <td><a href="{{ route('profileView',$member->id) }}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a></td>
             </tr>
             @endforeach
           </table>

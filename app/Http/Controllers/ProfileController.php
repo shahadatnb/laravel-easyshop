@@ -22,11 +22,8 @@ class ProfileController extends Controller
     public function profileView($id){
         $user = User::find($id);
         if($user){
-            $currentWallet = CurrentWallet::where('user_id',$id)->latest()->take(20)->get();
-            $currentBalance = $this->currentBalance($id);
-            $incomeWallet = EarnWallet::where('user_id',$id)->latest()->take(20)->get();
-            $incomeBalance = $this->earnBalance($id);
-            return view('profile.profileView',compact('currentWallet','currentBalance','incomeWallet','incomeBalance','user'));
+            $wallets=$this->allBalance($user->id);
+            return view('profile.profileView',compact('user','wallets'));
         }
         return redirect()->back();
     }

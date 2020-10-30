@@ -1,4 +1,4 @@
-@extends('layouts.admin-master')
+@extends('layouts.master')
 @section('stylesheet')
 @endsection
 @section('content')
@@ -36,138 +36,78 @@
         </div>
         <!-- /.col -->
         <div class="col-md-9">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Details</a></li>
-              <li><a href="#currentWallet" data-toggle="tab">Main Wallet</a></li>
-              <li><a href="#incomeWallet" data-toggle="tab">Income Wallet</a></li>
-              <li><a href="#password" data-toggle="tab">Password</a></li>
-            </ul>
-            <div class="tab-content">            
-              <!-- /.tab-pane -->
-              <div class="active tab-pane" id="activity">
-                <table class="table">
-                  <tr>
-                    <td></td>
-                    <td>ID no</td>
-                    <td>{{ $user->id }}</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>Username</td>
-                    <td>{{ $user->username }}</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>Full Name</td>
-                    <td>{{ $user->name }}</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>Mobile</td>
-                    <td>{{ $user->mobile }}</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>Email</td>
-                    <td>{{ $user->email }}</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>Joining Date</td>
-                    <td>{{ $user->created_at->format('d M Y') }}</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>Referral ID</td>
-                    <td>{{ $user->referralId }}</td>
-                  </tr>
-                  <!-- <tr>
-                    <td></td>
-                    <td>Skype ID</td>
-                    <td>{{ $user->skypeid }}</td>
-                  </tr> -->
-                </table>              
-                  
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="currentWallet">
-                <!-- The currentWallet -->
-                <p><b>Balance:</b> {{ $currentBalance }} Tk</p>
-                <table class="table">
-                  <tr>
-                    <th>Remark</th>
-                    <th>Receipt</th>
-                    <th>Payment</th>
-                    <th>Date</th>
-                  </tr>
-                  @foreach ($currentWallet as $member)
-                  <tr>
-                    <td>{{ $member->remark }}</td>
-                    <td>{{ $member->receipt }}</td>
-                    <td>{{ $member->payment }}</td>
-                    <td>{{ $member->created_at->format('d M Y h:i:s A') }}</td>
-                  </tr>
-                  @endforeach
-                </table>
-              </div>              
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="incomeWallet">
-                <!-- The currentWallet -->
-                <p><b>Balance:</b> {{ $incomeBalance }} Tk</p>
-                <table class="table">
-                  <tr>
-                    <th>Remark</th>
-                    <th>Receipt</th>
-                    <th>Payment</th>
-                    <th>Date</th>
-                  </tr>
-                  @foreach ($incomeWallet as $member)
-                  <tr>
-                    <td>{{ $member->remark }}</td>
-                    <td>{{ $member->receipt }}</td>
-                    <td>{{ $member->payment }}</td>
-                    <td>{{ $member->created_at->format('d M Y h:i:s A') }}</td>
-                  </tr>
-                  @endforeach
-                </table>
-              </div>              
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="password">
-                <!-- The currentWallet -->
-                <h3>Password Chenge</h3>
-                {!! Form::open(['url' => 'changePassAdmin','class'=>'form-horizontal']) !!}              
-                <input type="hidden" name="user_id" value="{{ $user->id }}">
-                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password" class="col-md-4 control-label">Password</label>
+          <h3>Password Chenge</h3>
+            {!! Form::open(['url' => 'changePassAdmin','class'=>'form-horizontal']) !!}              
+            <input type="hidden" name="user_id" value="{{ $user->id }}">
+            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label for="password" class="control-label">Password</label>
 
-                    <div class="col-md-6">
-                        <input id="password" type="text" class="form-control" name="password" required>
+                <div class="col-md-6">
+                    <input id="password" type="text" class="form-control" name="password" required>
 
-                        @if ($errors->has('password'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
                 </div>
-
-                <div class="form-group">
-                    <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">
-                            Change Password
-                        </button>
-                    </div>
+                <div class="col-md-6 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary">
+                        Change Password
+                    </button>
                 </div>
-              {!! Form::close() !!}
-              </div>              
-              <!-- /.tab-pane -->
-
-              
             </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- /.nav-tabs-custom -->
+          {!! Form::close() !!}
+          <table class="table">
+            <tr>
+              <td></td>
+              <td>ID no</td>
+              <td>{{ $user->id }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Username</td>
+              <td>{{ $user->username }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Full Name</td>
+              <td>{{ $user->name }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Mobile</td>
+              <td>{{ $user->mobile }}</td>
+            </tr>
+            @foreach($wallets as $key=>$balance)
+            <tr>
+              <td></td>
+              <td>{{$key}}</td>
+              <td>{{ $balance }}</td>
+            </tr>
+            @endforeach
+            <tr>
+              <td></td>
+              <td>Email</td>
+              <td>{{ $user->email }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Joining Date</td>
+              <td>{{ $user->created_at->format('d M Y') }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Referral ID</td>
+              <td>{{ $user->referralId }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Placement ID</td>
+              <td>{{ $user->placementId }}</td>
+            </tr>
+          </table>   
+          
         </div>
         <!-- /.col -->
       </div>
