@@ -43,11 +43,10 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/levelTree/id/{id}', 'HomeController@levelTreeId')->name('levelTreeId');
 	Route::get('/level', 'HomeController@level')->name('level');
 	Route::get('/matchingBonus', 'HomeController@matchingBonus')->name('matchingBonus');
-	Route::post('/sendMoneyAc', 'HomeController@sendMoneyAc')->name('sendMoneyAc');
-	//Route::post('/transferFromEarn', 'HomeController@transferFromEarn')->name('transferFromEarn');
 
-	Route::post('/withdrawFormEarn', 'HomeController@withdrawFormEarn')->name('withdrawFormEarn');
-	Route::post('/withdrawForMmyWallet', 'HomeController@withdrawForMmyWallet')->name('withdrawForMmyWallet');
+	Route::post('/sendMoneyAc', 'HomeController@sendMoneyAc')->name('sendMoneyAc');
+	Route::post('/withdrawBalance', 'HomeController@withdrawBalance')->name('withdrawBalance');
+	Route::post('/sendMoneyWw', 'HomeController@sendMoneyWw')->name('sendMoneyWw');
 
 	Route::get('/Link/{lType}', 'HomeController@Link')->name('Link');
 	Route::get('/tbonus', 'HomeController@tbonus')->name('tbonus');
@@ -62,9 +61,6 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/addOutsourcingBalance', 'earnController@addOutBalance')->name('addOutBalance');
 	Route::get('/Outsourcing', 'earnController@outsourcing')->name('outsourcing');
 	Route::get('/ptcs/click', 'PtcController@pctClick')->name('ptc.click');
-
-	Route::get('/myPv', 'HomeController@PointValue')->name('myPv');
-
 
 	Route::get('/order/myOrder', 'OrderController@myOrder')->name('myOrder');
 	Route::get('/order/buyPack/{id}', 'OrderController@buyPack')->name('buyPack');

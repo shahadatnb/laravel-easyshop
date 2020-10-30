@@ -35,16 +35,25 @@ class HomeController extends Controller
     public function memberList()
     {
         $totalMember = User::myChild(Auth::user()->id);
-        $members = User::where('referralId',Auth::user()->id)->get();
+        $members = User::where('placementId',Auth::user()->id)->get();
         return view('pages.memberList',compact('members','totalMember'));
     }
 
     public function memberListId($id)
     {
         $totalMember = User::myChild($id);
-        $members = User::where('referralId',$id)->get();
+        $members = User::where('placementId',$id)->get();
         return view('pages.memberList',compact('members','totalMember'));
     }
+
+    public function myWallet($wallet)
+    {
+        $transaction = $this->listBalance(Auth::user()->id,$wallet);
+        $balance = $this->balance(Auth::user()->id,$wallet);
+        $walletName = $this->wallets[$wallet];
+        return view('wallet.'.$wallet,compact('transaction','balance','walletName','wallet'));
+    }
+
 
 /*    public function level()
     {
@@ -95,16 +104,6 @@ class HomeController extends Controller
         $member = User::find($id);
         return view('pages.levelTree')->withMembers($member);
     }
-
-
-    public function myWallet($wallet)
-    {
-        $transaction = $this->listBalance(Auth::user()->id,$wallet);
-        $balance = $this->balance(Auth::user()->id,$wallet);
-        $walletName = $this->wallets[$wallet];
-        return view('wallet.'.$wallet,compact('transaction','balance','walletName'));
-    }
-    
 
 
 
@@ -340,26 +339,36 @@ class HomeController extends Controller
 
     public function sendMoneyAc(Request $request)
     {
-        if($this->currentBalance(Auth::user()->id) < $request->payment ){
+        $this->validate($request, array(
+            'user_id' => 'required|exists:users,id',
+            'wType' => 'required',
+            'remark' => 'nullable',
+            'payment' => 'required|numeric',//|min:'.$this->withdrowAmt,
+            )
+        );
+
+        if($this->balance(Auth::user()->id,$request->wType) < $request->payment ){
             Session::flash('warning','Sorry, Your Balance Less then'.$request->payment);
         }else{
-            $data = new CurrentWallet;
+            $data = new Wallet;
             $data->user_id = Auth::user()->id;
             $data->payment = $request->payment;
-            $data->remark = 'Sent to ID# '.$request->user_id;
+            $data->wType = $request->wType;
+            $data->remark = 'Sent to ID# '.$request->user_id.' '.$request->remark;
             $data->save();
 
             //$payble = $request->payment - ($request->payment/100)*5;
-            $data2 = new CurrentWallet;
+            $data2 = new Wallet;
             $data2->user_id = $request->user_id;
             $data2->receipt = $request->payment;//$payble;
+            $data2->wType = $request->wType;
             $data2->remark = 'Receipt Form ID# '.Auth::user()->id.'('.Auth::user()->name.')';
             $data2->save();
 
             Session::flash('success','Money Sent');
         }
 
-        return redirect()->route('currentWallet');
+        return redirect()->back();
     }
 
 
@@ -373,20 +382,54 @@ class HomeController extends Controller
     }
 
 
-    public function withdrawFormEarn(Request $request)
+    public function sendMoneyWw(Request $request)
     {
         $this->validate($request, array(
-            'remark' => 'required',
+            'remark' => 'nullable',
+            'payment' => 'required|numeric|min:'.$this->withdrowAmt,
+            )
+        );
+
+        if($this->balance(Auth::user()->id,$request->wType) < $request->payment ){
+            Session::flash('warning','Sorry, Your Balance Less then $'.$request->payment);
+        }else{
+            //$remark = $request->paymentMethod.' : '.$request->accountNo;
+            //$payble = $request->payment - ($request->payment/100)*10;
+            $data2 = new Wallet;
+            $data2->user_id = Auth::user()->id;
+            //$data2->payment = round($payble);
+            $data2->payment = $request->payment;
+            $data2->remark = $request->remark;
+            $data2->wType = $request->wType;
+            //$data2->admin_id = 1;//$request->paymentId;
+            $data2->save();
+
+            
+            $data = new Wallet;
+            $data->user_id = Auth::user()->id;
+            $data->receipt = $request->payment;
+            $data->remark = 'Withdraw - '.$request->remark;
+            $data->wType = 'withdrawWallet';
+            //$data->adminWid = $data2->id;
+            $data->save();
+
+            Session::flash('success','Transfared to ');
+        }
+        return redirect()->back();
+    }
+
+    public function withdrawBalance(Request $request)
+    {
+        $this->validate($request, array(
+            'remark' => 'nullable',
             'payment' => 'required|numeric|min:'.$this->withdrowAmt,
             )
         );
 
         if($request->payment < $this->withdrowAmt ){
-            Session::flash('warning','Sorry, Withdraw request minimum Balance '.$this->withdrowAmt.'.');
-        }elseif($this->earnBalance(Auth::user()->id) < $request->payment ){
-            Session::flash('warning','Sorry, Your Balance Less then'.$request->payment);
-        }elseif(Auth::user()->premium != 2 ){
-            Session::flash('warning','Sorry, You are not Standrad menber.');
+            Session::flash('warning','Sorry, Withdraw request minimum Balance $'.$this->withdrowAmt.'.');
+        }elseif($this->balance(Auth::user()->id,'withdrawWallet') < $request->payment ){
+            Session::flash('warning','Sorry, Your Balance Less then $'.$request->payment);
         }else{
             //$remark = $request->paymentMethod.' : '.$request->accountNo;
             //$payble = $request->payment - ($request->payment/100)*10;
@@ -394,18 +437,17 @@ class HomeController extends Controller
             $data2->user_id = Auth::user()->id;
             //$data2->payment = round($payble);
             $data2->payment = $request->payment;
-            $data2->remark = $request->remark;
-            //$data2->remark = $remark;
+            $data2->remark = $request->remark;            
             //$data2->admin_id = 1;//$request->paymentId;
             $data2->save();
 
             
-            $data = new EarnWallet;
+            $data = new Wallet;
             $data->user_id = Auth::user()->id;
             $data->payment = $request->payment;
-            $data->remark = $request->remark;
-            //$data->remark = $remark;
-            $data->adminWid = $data2->id;
+            $data->remark = 'Withdraw - '.$request->remark;
+            $data->wType = 'withdrawWallet';
+            //$data->adminWid = $data2->id;
             $data->save();
 
             Session::flash('success','Withdraw Processing, Please wait 24 hours');

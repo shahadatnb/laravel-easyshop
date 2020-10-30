@@ -47,8 +47,6 @@
               <th>Date</th>
               <th>User</th>
               <th>Amount</th>
-              <th>Payment</th>
-              <th>Type</th>
               <th>Remark</th>
             </tr>
             @foreach ($transaction as $item)
@@ -56,8 +54,6 @@
               <td>{{ $item->created_at->format('d M Y h:i:s A') }}</td>
               <td>{{ $item->user_id }}</td>
               <td>{{ $item->receipt }}</td>
-              <td>{{ $item->payment }}</td>
-              <td>{{ $item->wType }}</td>
               <td>{{ $item->remark }}</td>
             </tr>
             @endforeach

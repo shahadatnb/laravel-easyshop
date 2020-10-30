@@ -38,26 +38,27 @@
           </table>
         </div>
         <!-- /.box-body -->
-{{--         <div class="box-footer">
+         <div class="box-footer">
            @include('layouts._message')
-          <h3 class="box-title">Send Money Another Account</h3>
-          {!! Form::open(['route'=>'sendMoneyAc','method'=>'POST']) !!}
+          <h3 class="box-title">Widthro balance</h3>
+          {!! Form::open(['route'=>'withdrawBalance','method'=>'POST']) !!}
           <div class="row">
             <div class="col-md-4">
-            {{ Form::label('user_id','User Id') }}
-            {{ Form::text('user_id',null,['class'=>'form-control','required'=>'']) }} 
-          </div>
+              {{ Form::label('payment','Amount') }}
+              {{ Form::text('payment',null,['class'=>'form-control','required'=>'']) }}
+            </div>
             <div class="col-md-4">
-            {{ Form::label('payment','Amount') }}
-            {{ Form::text('payment',null,['class'=>'form-control','required'=>'']) }}
-          </div>
+              {{ Form::label('remark','Remark') }}
+              {{ Form::text('remark',null,['class'=>'form-control','required'=>'']) }}
+            </div>
             <div class="col-md-4"> <br>
-            {{ Form::submit('Send',array('class'=>'form-control btn btn-success')) }}</div>
+              {{ Form::submit('Send',array('class'=>'form-control btn btn-success')) }}
+            </div>
           </div>
          {!! Form::close() !!}
 
 
-        </div> --}}
+        </div>
         <!-- /.box-footer-->
       </div>
       <!-- /.box -->

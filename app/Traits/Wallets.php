@@ -8,7 +8,7 @@ use App\User;
 trait Wallets
 {
     public $wallets =[
-        'widthrawWallet'=>'Widthraw wallet',
+        'withdrawWallet'=>'Withdraw wallet',
         'shoppingWallet'=>'Shopping wallet',
         'registerWallet'=>'Register wallet',
         'refferWallet'=>'Refer & generation bonus wallet',

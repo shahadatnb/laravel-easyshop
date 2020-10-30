@@ -22,7 +22,7 @@ class AdminController extends Controller
 
     public function sendMoney()
     {
-        $transaction = AdminWallet::where('admin_id',Auth::User()->id)->latest()->paginate(20);
+        $transaction = AdminWallet::where('admin_id',Auth::User()->id)->whereNotNull('receipt')->latest()->paginate(20);
         $users = $this->userArray();
         $wallets = $this->wallets;
         return view('admin.sendMoney',compact('transaction','users','wallets'));
@@ -30,7 +30,7 @@ class AdminController extends Controller
 
     public function withdrawWetting()
     {
-        $tran = AdminWallet::where('payment','>',0)->latest()->paginate(20);
+        $tran = AdminWallet::whereNotNull('payment')->latest()->paginate(20);
         return view('admin.withdraw')->withTransaction($tran);
     }
 
@@ -48,7 +48,7 @@ class AdminController extends Controller
        	$data = new AdminWallet;
         $data->user_id = $request->user_id;
         $data->receipt = $request->receipt;
-        $data->remark =  'Sent By: '.Auth::User()->name;
+        $data->remark =  $request->wType.' Sent By: '.Auth::User()->name;
         $data->admin_id = Auth::User()->id;
         $data->save();
        	

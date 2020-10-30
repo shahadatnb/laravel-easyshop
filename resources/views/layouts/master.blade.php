@@ -73,17 +73,17 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/sendMoney') }}">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-fw fa-dollar-sign"></i>
           <span>Send Money</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/withdrawWetting') }}">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-fw fa-dollar-sign"></i>
           <span>Withdraw Money</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/allMemberList') }}">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-fw fa-user-plus"></i>
           <span>Member List</span></a>
       </li>
 @endif      
@@ -100,13 +100,13 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
+          <i class="fas fa-fw fa-wallet"></i>
           <span>Wallet</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Wallet</h6>
-            <a class="collapse-item" href="{{ url('/myWallet/widthrawWallet')}}">Widthraw wallet</a>
+            <a class="collapse-item" href="{{ url('/myWallet/withdrawWallet')}}">Withdraw wallet</a>
             <a class="collapse-item" href="{{ url('/myWallet/shoppingWallet')}}">Shopping wallet</a>
             <a class="collapse-item" href="{{ url('/myWallet/registerWallet')}}">Register wallet</a>
             <a class="collapse-item" href="{{ url('/myWallet/refferWallet')}}">Refer & generation bonus wallet</a>
@@ -118,12 +118,12 @@
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/memberList') }}">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-fw fa-user-plus"></i>
           <span>Referral List</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/levelTree') }}">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-fw fa-street-view"></i>
           <span>Level Tree</span></a>
       </li>
 
@@ -193,7 +193,7 @@
                 </a>
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
+                  ID {{Auth::user()->id}}
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}"
