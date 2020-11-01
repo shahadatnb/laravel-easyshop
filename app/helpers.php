@@ -68,26 +68,7 @@ function the_content_limit($content,$limit){
     return str_limit($content,$limit);
 }
 
-/**
- * @param null $title
- * @param null $message
- * @return \Illuminate\Foundation\Application|mixed
- * For the flash messages.
- */
-function flash($title = null, $message = null) {
-    // Set variable $flash to fetch the Flash Class
-    // in Flash.php
-    $flash = app('App\Http\Flash');
 
-    // If 0 parameters are passed in ($title, $message)
-    // then just return the flash instance.
-    if (func_num_args() == 0) {
-        return $flash;
-    }
-
-    // Just return a regular flash->info message
-    return $flash->info($title, $message);
-}
 
 /**
  * @param $date
@@ -102,9 +83,3 @@ function prettyDate($date) {
 function prettyDateS($date) {
     return date("d/m", strtotime($date));
 }
-
-//file_get_contents("http://sms.rampsbd.com/smsapi?api_key=C20015595aeaf3b16ee668.16154193&type=text&contacts=01757839516&senderid=4559&msg=".$msg);
-
-//$status=file_get_contents("http://sms.rampsbd.com/miscapi/C20015595aeaf3b16ee668.16154193/getDLR/getAll");
-
-//$balance=file_get_contents("http://sms.rampsbd.com/miscapi/C20015595aeaf3b16ee668.16154193/getBalance");

@@ -28,6 +28,7 @@
 
         </div>
         <div class="box-body">
+          @include('layouts._message')
           <table class="table">
             <tr>
               <th>ID</th>
@@ -46,10 +47,10 @@
                 <a class="btn btn-success btn-xs" href="{{ route('products.show',$product->id) }}"><i class="fas fa-eye"></i></a>
                 <a class="btn btn-success btn-xs" href="{{ route('products.edit',$product->id) }}"><i class="fas fa-edit"></i>  Edit</a>
                 
-                  @if($product->publication_status==0)
+                  @if($product->status==0)
                     <a class="btn btn-primary btn-xs" href="{{ route('productHide',$product->id) }}">Show</a>
                   @else
-                    <a class="btn btn-default btn-xs" href="{{ route('productHide',$product->id) }}">Hide</a>
+                    <a class="btn btn-danger btn-xs" href="{{ route('productHide',$product->id) }}">Hide</a>
                   @endif
                 
                 <form class="delete" action="{{ route('products.destroy',$product->id) }}" method="post">

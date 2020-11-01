@@ -4,8 +4,20 @@
 <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
 
 <div class="row">
-	@foreach($wallets as $key=>$balance)
-	<div class="col-xl-3 col-md-6 mb-4">
+	@foreach($wallets as $item)
+  <div class="col-sm-6 col-lg-3 mb-4">
+    <div class="card bg-{{$item['bg']}} text-white shadow">
+      <div class="card-body text-center">
+        {{$item['title']}}
+        <div class="text-white">{{$item['balance']}} Tk</div>
+      </div>
+    </div>
+  </div>
+	@endforeach
+</div>
+ @endsection
+ {{-- 
+<div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-success shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -19,8 +31,4 @@
           </div>
         </div>
       </div>
-    </div>
-    @endforeach
-</div>
-
- @endsection
+    </div> --}}

@@ -8,12 +8,12 @@ use App\User;
 trait Wallets
 {
     public $wallets =[
-        'withdrawWallet'=>'Withdraw wallet',
-        'shoppingWallet'=>'Shopping wallet',
-        'registerWallet'=>'Register wallet',
-        'refferWallet'=>'Refer & generation bonus wallet',
-        'autoWoardWallet'=>'Auto board wallet',
-        'rankWallet'=>'Rank wallet',
+        'withdrawWallet'=>['title'=>'Withdraw wallet','bg'=>'primary'],
+        'shoppingWallet'=>['title'=>'Shopping wallet','bg'=>'success'],
+        'registerWallet'=>['title'=>'Register wallet','bg'=>'info'],
+        'refferWallet'=>['title'=>'Refer & generation bonus wallet','bg'=>'warning'],
+        'autoWoardWallet'=>['title'=>'Auto board wallet','bg'=>'danger'],
+        'rankWallet'=>['title'=>'Rank wallet','bg'=>'secondary'],
     ];
 
     public function balance($id,$wType)
@@ -28,7 +28,7 @@ trait Wallets
 
         $balances = [];
             foreach ($this->wallets as $key=>$value) {
-                $balances[$value] = $this->balance($id,$key);
+                $balances[$key] = ['balance'=>$this->balance($id,$key),'title'=>$value['title'],'bg'=>$value['bg']];
             }
         return $balances;
     }

@@ -75,13 +75,13 @@
         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
     </div>
 </div>
-<!-- 
+
 <div class="form-group{{ $errors->has('hand') ? ' has-error' : '' }}">
     <label for="hand" class="col control-label">Side</label>
 
     <div class="col">
-        {{-- {{ Form::select('hand', ['1' => 'Left Side', '2' => 'Right Side'
-                      ], null, ['class'=>'form-control','required'=>'','placeholder' => 'Hand Side']) }} --}}
+        {{ Form::select('hand', ['1' => 'Left Side', '2' => 'Right Side'
+                      ], null, ['class'=>'form-control','required'=>'','placeholder' => 'Hand Side']) }}
 
         @if ($errors->has('hand'))
             <span class="help-block">
@@ -91,7 +91,7 @@
     </div>
 </div>
 
-
+<!-- 
 {{-- <div class="form-group{{ $errors->has('pin') ? ' has-error' : '' }}">
     <label for="pin" class="col control-label">PIN</label>
 

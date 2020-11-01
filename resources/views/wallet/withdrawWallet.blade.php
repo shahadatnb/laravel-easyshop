@@ -38,20 +38,35 @@
           </table>
         </div>
         <!-- /.box-body -->
+        @php
+          $accounts = [
+            'bKash'=>'bKash',
+            'Rocket'=>'Rocket',
+            'Others'=>'Others'
+          ];
+        @endphp
          <div class="box-footer">
            @include('layouts._message')
           <h3 class="box-title">Widthro balance</h3>
           {!! Form::open(['route'=>'withdrawBalance','method'=>'POST']) !!}
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
               {{ Form::label('payment','Amount') }}
               {{ Form::text('payment',null,['class'=>'form-control','required'=>'']) }}
+            </div>
+            <div class="col-md-2">
+              {{ Form::label('bankName','Bank Name') }}
+              {{ Form::select('bankName',$accounts,null,['class'=>'form-control','required'=>'','placeholder'=>'Bank Name']) }}
+            </div>
+            <div class="col-md-2">
+              {{ Form::label('accountNo','Account No') }}
+              {{ Form::text('accountNo',null,['class'=>'form-control','required'=>'']) }}
             </div>
             <div class="col-md-4">
               {{ Form::label('remark','Remark') }}
               {{ Form::text('remark',null,['class'=>'form-control','required'=>'']) }}
             </div>
-            <div class="col-md-4"> <br>
+            <div class="col-md-2"> <br>
               {{ Form::submit('Send',array('class'=>'form-control btn btn-success')) }}
             </div>
           </div>

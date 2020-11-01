@@ -50,7 +50,7 @@ class HomeController extends Controller
     {
         $transaction = $this->listBalance(Auth::user()->id,$wallet);
         $balance = $this->balance(Auth::user()->id,$wallet);
-        $walletName = $this->wallets[$wallet];
+        $walletName = $this->wallets[$wallet]['title'];
         return view('wallet.'.$wallet,compact('transaction','balance','walletName','wallet'));
     }
 
@@ -421,6 +421,8 @@ class HomeController extends Controller
     public function withdrawBalance(Request $request)
     {
         $this->validate($request, array(
+            'bankName' => 'required',
+            'accountNo' => 'required',
             'remark' => 'nullable',
             'payment' => 'required|numeric|min:'.$this->withdrowAmt,
             )
@@ -437,7 +439,7 @@ class HomeController extends Controller
             $data2->user_id = Auth::user()->id;
             //$data2->payment = round($payble);
             $data2->payment = $request->payment;
-            $data2->remark = $request->remark;            
+            $data2->remark = $request->bankName.' : '.$request->accountNo.' - '.$request->remark;            
             //$data2->admin_id = 1;//$request->paymentId;
             $data2->save();
 
@@ -445,7 +447,7 @@ class HomeController extends Controller
             $data = new Wallet;
             $data->user_id = Auth::user()->id;
             $data->payment = $request->payment;
-            $data->remark = 'Withdraw - '.$request->remark;
+            $data->remark = 'Withdraw-'.$request->bankName.' : '.$request->accountNo.' - '.$request->remark;
             $data->wType = 'withdrawWallet';
             //$data->adminWid = $data2->id;
             $data->save();

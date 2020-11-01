@@ -44,12 +44,14 @@ class OrderController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'mobile' => 'required',
             'referralId' => 'required|exists:users,id',
-            'placementId' => 'required|unique_with|exists:users,id',
+            'placementId' => 'required|exists:users,id',
+            'hand' => 'required|unique_with:users,placementId,hand',
             'kuriar' => 'required',
             'address' => 'required',
             'product_id' => 'required',
         ),[
-            'placementId.unique_with' => 'This referral Id already 5 member registered, please try another referral ID'
+            //'placementId.unique_with' => 'This referral Id already 5 member registered, please try another referral ID'
+            'hand.unique_with' => 'This hand side is already used, please try another hand or another Placement ID',
         ]);
 
         $product = Product::find($request->product_id);
@@ -83,6 +85,7 @@ class OrderController extends Controller
             $data->mobile = $request->mobile;
             $data->referralId = $request->referralId;
             $data->placementId = $request->placementId;
+            $data->hand = $request->hand;
             $data->password = bcrypt($request->password);
             $data->save();
 

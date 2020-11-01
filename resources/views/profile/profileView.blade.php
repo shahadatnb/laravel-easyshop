@@ -79,11 +79,11 @@
               <td>Mobile</td>
               <td>{{ $user->mobile }}</td>
             </tr>
-            @foreach($wallets as $key=>$balance)
+            @foreach($wallets as $item)
             <tr>
               <td></td>
-              <td>{{$key}}</td>
-              <td>{{ $balance }}</td>
+              <td>{{$item['title']}}</td>
+              <td>{{$item['balance']}} Tk</td>
             </tr>
             @endforeach
             <tr>
