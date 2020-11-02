@@ -108,7 +108,7 @@
 -->
 
 
-<div class="form-group{{ $errors->has('referralId') ? ' has-error' : '' }}">
+{{-- <div class="form-group{{ $errors->has('referralId') ? ' has-error' : '' }}">
     <label for="referralId" class="col control-label">Referral ID</label>
 
     <div class="col">
@@ -120,7 +120,8 @@
             </span>
         @endif
     </div>
-</div>
+</div> --}}
+<input type="hidden" name="referralId" value="{{ Auth::user()->id }}" required>
 
 <div class="form-group{{ $errors->has('placementId') ? ' has-error' : '' }}">
     <label for="placementId" class="col control-label">Placement ID</label>
