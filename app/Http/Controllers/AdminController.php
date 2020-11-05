@@ -24,7 +24,8 @@ class AdminController extends Controller
     {
         $transaction = AdminWallet::where('admin_id',Auth::User()->id)->whereNotNull('receipt')->latest()->paginate(20);
         $users = $this->userArray();
-        $wallets = $this->wallets;
+        $wallets = $this->wallets();
+        //dd($wallets); exit;
         return view('admin.sendMoney',compact('transaction','users','wallets'));
     }
 

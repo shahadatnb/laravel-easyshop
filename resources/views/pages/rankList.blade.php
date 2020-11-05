@@ -4,22 +4,27 @@
 <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
 
 <div class="row">
-	@foreach($wallets as $item)
-  <div class="col-sm-6 col-lg-3 mb-4">
-    <div class="card bg-{{$item['bg']}} text-white shadow">
-      <div class="card-body text-center">
-        {{$item['title']}}
-        <div class="text-white">{{$item['balance']}} Tk</div>
-      </div>
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Rank List</h3>
     </div>
-  </div>
-	@endforeach
-  <div class="col-sm-6 col-lg-3 mb-4">
-    <div class="card bg-dark text-white shadow">
-      <div class="card-body text-center">
-        {{$rankInfo['title']}}
-        <div class="text-white">Level: {{$rankInfo['rank']}}</div>
-      </div>
+    <div class="box-body">
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Left + Right</th>
+          <th>Prize</th>
+          <th>Rank Namr</th>
+        </tr>
+        @foreach($rankInfo as $key=>$item)
+        <tr>
+          <td>{{$key}}</td>
+          <td>{{$item['point']}} + {{$item['point']}}</td>
+          <td>{{$item['prize']}}</td>
+          <td>{{$item['title']}}</td>
+        </tr>
+        @endforeach
+      </table>
     </div>
   </div>
 </div>

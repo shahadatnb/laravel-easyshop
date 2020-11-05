@@ -46,23 +46,47 @@ class User extends Authenticatable
     public static function myChild($id){
         global $count;
         $count = 0;
-        $child =  User::where('placementId',$id)->first(); //->pluck('id')
-        if($child){
-            $count = 1;
-            if(count($child->childs)){
-              $count = User::cChild($child->childs,$count);
-            }
+        $child =  User::where('placementId',$id)->pluck('id')->toArray();
+        //dd($child); exit;
+        if(count($child)>0){            
+            $count = count($child);
+            $count = User::cChild($child,$count);
         }
         return $count; 
     }
 
     public static function cChild($child,$count){
+        global $count;
+        $child =  User::whereIn('placementId',$child)->pluck('id')->toArray();
+        if(count($child)>0){            
+            $count += count($child);
+            User::cChild($child,$count);
+        }
+        return $count;
+    }
+
+
+    public static function myChildLR($id, $hand){
+        global $count;
+        $count = 0;
+        $child =  User::where('hand',$hand)->where('placementId',$id)->first(); //->pluck('id')
+        
+        if($child){
+            $count = 1;
+            if(count($child->childs)){
+              $count = User::cChildLR($child->childs,$count);
+            }
+        }
+        return $count;
+    }
+
+    public static function cChildLR($child,$count){
+        global $count;
         //dd($child);
         foreach ($child as $member) { //dd($member->childs);//dd(count(User::nChilds($member->id)));            
-            global $count;
             $count ++;
             if(count($member->childs)){
-                    User::cChild($member->childs,$count);
+                User::cChildLR($member->childs,$count);
             }
         }
         return $count;

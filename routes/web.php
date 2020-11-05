@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::group(['middleware' => ['auth']], function(){
 	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/rank', 'HomeController@rank')->name('rank');
+	Route::get('/rankList', 'HomeController@rankList')->name('rankList');
 	//Route::get('/404', 'PageController@notFind')->name('/404');
 
 	Route::get('/upgrateStandrad', 'HomeController@upgrateStandrad')->name('upgrateStandrad');

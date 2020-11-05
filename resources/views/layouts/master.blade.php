@@ -126,6 +126,11 @@
           <i class="fas fa-fw fa-street-view"></i>
           <span>Level Tree</span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/rankList') }}">
+          <i class="fas fa-fw fa-street-view"></i>
+          <span>Rank List</span></a>
+      </li>
 
       
 

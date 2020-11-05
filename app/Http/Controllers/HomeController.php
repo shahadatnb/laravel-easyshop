@@ -28,8 +28,21 @@ class HomeController extends Controller
     }
 
     public function index(){
+        $this->rank();     
+        $rankInfo = [
+            'rank'=>Auth::user()->rank,
+            'title'=>$this->rank[Auth::user()->rank]['title'],
+        ];
+        //dd($rankInfo);
        $wallets=$this->allBalance(Auth::user()->id);
-        return view('pages.dashboard',compact('wallets'));
+        return view('pages.dashboard',compact('wallets','rankInfo'));
+    }    
+
+    public function rankList(){
+       $rankInfo = $this->rank;
+       array_shift($rankInfo);
+       //dd($rankInfo);
+        return view('pages.rankList',compact('rankInfo'));
     }
 
     public function memberList()
@@ -54,26 +67,37 @@ class HomeController extends Controller
         return view('wallet.'.$wallet,compact('transaction','balance','walletName','wallet'));
     }
 
+    public function rank(){
+        $cLeft=User::myChildLR(Auth::user()->id,1);
+        $cRight=User::myChildLR(Auth::user()->id,2);
+        if($cLeft<=$cRight){
+            $small = $cLeft;
+        }else{
+            $small = $cRight;
+        }
+        
+        $userRank = Auth::user()->rank;
+        $userRank++;
+        $rank = $this->rank;
+        //dd($cLeft); exit;
+        if($small >= $rank[$userRank]['point']){
 
-/*    public function level()
-    {
-        $ids  = array(Auth::user()->id);
-        //$ids  = array(2,3,30,31);
-        $datas  = array();
-        $members = array();
-        for($i=1;$i<11;$i++){
-            $members = null;
-            if(!empty($ids)){
-                foreach ($ids as $id) {
-                    $members[] = User::where('referralId',$id)->pluck('id')->toArray();
-                }
-                $ids = array_collapse($members);
-                $datas[$i] = count($ids);                
-            }
+            $user = User::find(Auth::user()->id);
+            $user->rank = $userRank;
+            $user->save();
+
+            $data2 = new Wallet;
+            $data2->user_id = Auth::user()->id;
+            $data2->receipt = $rank[$userRank]['amount'];
+            $data2->wType = 'rankWallet';
+            $data2->remark = 'Rank Bonus #'.$userRank;
+            $data2->save();
         }
 
-        return view('pages.lavelList',compact('datas'));
-    }*/
+        return null;
+    }
+
+
     public function level()
     {
         $ids  = array(Auth::user()->id);
