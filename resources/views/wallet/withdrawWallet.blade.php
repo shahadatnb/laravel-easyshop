@@ -47,7 +47,7 @@
         @endphp
          <div class="box-footer">
            @include('layouts._message')
-          <h3 class="box-title">Withdrow balance</h3>
+          <h3 class="box-title">Withdraw balance</h3>
           {!! Form::open(['route'=>'withdrawBalance','method'=>'POST']) !!}
           <div class="row">
             <div class="col-md-2">
