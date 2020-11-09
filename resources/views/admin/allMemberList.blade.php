@@ -14,11 +14,11 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
           <h3 class="box-title">All Member List</h3>
         </div>
-        <div class="box-body">
+        <div class="card-body">
           <div class="row">
             <div class="col-md-6"><input type="text" class="form-control" id="userID" placeholder="User ID" name="id"></div>
             <div class="col-md-6"><button onclick="" class="btn btn-primary" id="go">GO</button></div>
@@ -57,7 +57,7 @@
           </table>
           <div class="text-center">{{ $members->links() }}</div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <div class="card-footer">
         </div>
         <!-- /.box-footer-->
       </div>

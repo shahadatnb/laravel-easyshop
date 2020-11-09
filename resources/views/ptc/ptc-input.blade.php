@@ -14,10 +14,10 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
           <h3 class="box-title">PTC</h3>
-          <div class="box-tools pull-right">
+          <div class="card-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
               <i class="fa fa-minus"></i></button>
@@ -25,7 +25,7 @@
               <i class="fa fa-times"></i></button>
           </div>
         </div>
-        <div class="box-body">
+        <div class="card-body">
           {!! Form::open(['route'=>'ptcs.store','method'=>'POST','class'=>'form-horizontal']) !!}
           <div class="row">
             <div class="col-md-3">
@@ -42,7 +42,7 @@
          {!! Form::close() !!}
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <div class="card-footer">
           <table class="table">
             <tr>
               <th>ID</th>

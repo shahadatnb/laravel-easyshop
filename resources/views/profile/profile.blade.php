@@ -70,8 +70,8 @@
       <div class="col-md-3">
 
           <!-- Profile Image -->
-          <div class="box box-primary">
-            <div class="box-body box-profile">
+          <div class="card box-primary">
+            <div class="card-body box-profile">
               @if(Auth::user()->photo != null )
               <img class="profile-user-img img-responsive img-circle" src="{{url('/')}}/public/upload/member/{{ Auth::user()->photo }}" alt="profile picture">
               @else

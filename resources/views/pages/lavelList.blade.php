@@ -16,8 +16,8 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
           
           <table class="table table-bordered table-striped">
             <tr>
@@ -34,7 +34,7 @@
           
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <div class="card-footer">
           
         </div>
         <!-- /.box-footer-->

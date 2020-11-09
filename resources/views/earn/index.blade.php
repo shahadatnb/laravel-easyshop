@@ -14,11 +14,11 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border earn">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border earn">
           <marquee behavior="" direction="">{{ App\Setting::settingValue('live_bett_msg') }}</marquee>
         </div>
-        <div class="box-body" style="background: rgba(0, 0, 0, 0) url('{{url('/')}}/public/images/earn-bg.jpg') repeat scroll 0 0 / cover; height: 600px">
+        <div class="card-body" style="background: rgba(0, 0, 0, 0) url('{{url('/')}}/public/images/earn-bg.jpg') repeat scroll 0 0 / cover; height: 600px">
           <a href="{{url('live')}}" class="btn btn-danger btn-lg btn-earn">Live</a>
           <a href="{{url('live2')}}" class="btn btn-danger btn-lg btn-earn">Live2</a>
           <a href="#" class="btn btn-danger btn-lg btn-earn">Runner</a>

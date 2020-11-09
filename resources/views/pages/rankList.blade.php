@@ -4,11 +4,11 @@
 <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
 
 <div class="row">
-  <div class="box">
-    <div class="box-header with-border">
+  <div class="card shadow mb-4">
+    <div class="card-header with-border">
       <h3 class="box-title">Rank List</h3>
     </div>
-    <div class="box-body">
+    <div class="card-body">
       <table class="table">
         <tr>
           <th>ID</th>

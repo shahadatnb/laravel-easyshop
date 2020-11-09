@@ -14,11 +14,11 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
           <h3 class="box-title">Settings</h3>
         </div>
-        <div class="box-body">
+        <div class="card-body">
           @foreach($settings as $setting)
           {!! Form::open(['route'=>['saveSetting',$setting->id],'method'=>'PUT','class'=>'form-horizontal']) !!}
           <div class="row">
@@ -33,7 +33,7 @@
          @endforeach
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <div class="card-footer">
           Footer
         </div>
         <!-- /.box-footer-->

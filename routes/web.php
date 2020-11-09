@@ -95,6 +95,9 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::resource('products','ProductController');
 	Route::get('/productHide/{id}', 'ProductController@productHide')->name('productHide');
 
+	Route::resource('cats','ProductCat');
+	Route::get('/catHide/{id}', 'ProductCat@catHide')->name('catHide');
+
 	Route::get('/productDelevery', 'ProductController@productDelevery')->name('productDelevery');
 	Route::get('/productDeleveryConfirm/{id}', 'ProductController@productDeleveryConfirm')->name('productDeleveryConfirm');
 

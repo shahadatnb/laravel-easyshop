@@ -14,11 +14,11 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border earn">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border earn">
           <marquee behavior="" direction="">{{ App\Setting::settingValue('live2_bett_msg') }}</marquee>
         </div>
-        <div class="box-body text-center games" style="background: rgba(0, 0, 0, 0) url('{{url('/')}}/public/images/earn-bg.jpg') repeat scroll 0 0 / cover; height: 600px">
+        <div class="card-body text-center games" style="background: rgba(0, 0, 0, 0) url('{{url('/')}}/public/images/earn-bg.jpg') repeat scroll 0 0 / cover; height: 600px">
           <div><a href="#" class="btn btn-danger btn-lg btn-earn">Live2</a></div>
            @include('layouts._message')
           <h1 class="text-left heading">{!! $msg !!}</h1>

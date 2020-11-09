@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+@php use App\User; @endphp
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
 
@@ -19,6 +20,7 @@
       <div class="card-body text-center">
         {{$rankInfo['title']}}
         <div class="text-white">Level: {{$rankInfo['rank']}}</div>
+        <div class="text-white">Left# {{User::myChildLR(Auth::user()->id, 1)}} Right# {{User::myChildLR(Auth::user()->id, 2)}}</div>
       </div>
     </div>
   </div>

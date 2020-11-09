@@ -32,11 +32,11 @@
           </div>          
         </div>
         <div class="col-lg-6 col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
+          <div class="card shadow mb-4">
+            <div class="card-header with-border">
               <h3 class="box-title">Filup your Information</h3>
             </div>
-            <div class="box-body">
+            <div class="card-body">
               {!! Form::open(['route'=>'buyPackSubmit','method'=>'POST']) !!}
               <div class="row">
                 @include('auth.reg_field')

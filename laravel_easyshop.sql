@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2020 at 04:55 PM
+-- Generation Time: Nov 09, 2020 at 05:25 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -325,6 +325,7 @@ CREATE TABLE `pro_cats` (
   `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -333,8 +334,9 @@ CREATE TABLE `pro_cats` (
 -- Dumping data for table `pro_cats`
 --
 
-INSERT INTO `pro_cats` (`id`, `title`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Electronics', NULL, NULL, NULL);
+INSERT INTO `pro_cats` (`id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Electronics', NULL, 1, NULL, '2020-11-09 16:23:51'),
+(2, 'Food', NULL, 1, '2020-11-09 16:06:17', '2020-11-09 16:06:17');
 
 -- --------------------------------------------------------
 
@@ -463,7 +465,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `mobile`, `referralId`, `placementId`, `hand`, `rank`, `payment_method`, `account_details`, `pin`, `skypeid`, `premium`, `admin`, `password`, `photo`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(5000, 'apogee24', 'shahadat', 'apogee24@apogee24.com', '01700000000', 0, NULL, 0, 2, NULL, NULL, NULL, NULL, 2, b'1', '$2y$10$.ZuvdXjDhCb41OwA7shYNuf4g5DDo9HuhHk8Jb/DfLD1TnSyFhuIu', '1518974269_logo.png', 1, 'zmYK351eVNXeTj3UiROXRVSnKAzFULR5Uaw70nA0EhgobhMCZpvxGOXOsnFy', '2018-02-11 19:35:05', '2020-11-04 15:15:29'),
+(5000, 'apogee24', 'shahadat', 'apogee24@apogee24.com', '01700000000', 0, NULL, 0, 1, NULL, NULL, NULL, NULL, 2, b'1', '$2y$10$.ZuvdXjDhCb41OwA7shYNuf4g5DDo9HuhHk8Jb/DfLD1TnSyFhuIu', '1518974269_logo.png', 1, 'zmYK351eVNXeTj3UiROXRVSnKAzFULR5Uaw70nA0EhgobhMCZpvxGOXOsnFy', '2018-02-11 19:35:05', '2020-11-04 17:02:48'),
 (5001, 'apoogee24', 'apoogee1', 'tatusar1993@gmail.com', '01700000000', 5000, 5000, 1, 0, NULL, NULL, '69H3usSR', NULL, 1, b'0', '$2y$10$eQI9T3F5BRTgxD/iPSSCQuuwTmttagG7k.UbDULxWD5T.9WjrJ51C', NULL, 1, '8UhOiZtT3DT9RKa6eAY3im6KjmKLYgQ91CsD2vKqGsjRPa73Ukx7On35caN4', '2020-10-10 14:06:00', '2020-10-10 14:06:00'),
 (5002, 'apoogee24', 'apoogee2', 'tatusar1993@gmail.com', '01700000000', 5001, 5000, 2, 0, NULL, NULL, 'fRa2AR8M', NULL, 1, b'0', '$2y$10$1wY8M.4ITAtVRGO0u4JCFeRZUQ4VfNLOLV8HgwEfrmHBYuNWzWBXy', NULL, 1, 'ING0OXFXPILogc4H8a2HT2CVJ1U5zHoguz9dACVAzQ6ji9WIUdckoGveLlAn', '2020-10-10 14:09:10', '2020-10-10 14:09:10'),
 (5003, 'apoogee24', 'apoogee3', 'tatusar1993@gmail.com', '01700000000', 5001, 5002, 2, 0, NULL, NULL, 'TFVyLHxh', NULL, 1, b'0', '$2y$10$vjLjdoJju3kd7QloxKJXyeUR112rp.aJDO0W62QWiLxBw5I35hDQm', NULL, 1, 'HJYMUmnbElrEJ6MCRUHVNaQ31S1vBgC0k9mUwBD0cSgJnpDZkgB60jGVDchj', '2020-10-10 14:11:14', '2020-10-10 14:11:14'),
@@ -606,7 +608,8 @@ INSERT INTO `wallets` (`id`, `user_id`, `receipt`, `payment`, `wType`, `remark`,
 (36, 5000, NULL, '200.00', 'registerWallet', 'Buy Product #9', '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
 (37, 5000, '20.00', NULL, 'refferWallet', 'Buy Product', '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
 (38, 5000, '500.00', NULL, 'rankWallet', 'Rank Bonus #1', '2020-11-04 15:13:30', '2020-11-04 15:13:30'),
-(39, 5000, '1500.00', NULL, 'rankWallet', 'Rank Bonus #2', '2020-11-04 15:15:29', '2020-11-04 15:15:29');
+(39, 5000, '1500.00', NULL, 'rankWallet', 'Rank Bonus #2', '2020-11-04 15:15:29', '2020-11-04 15:15:29'),
+(40, 5000, '500.00', NULL, 'rankWallet', 'Rank Bonus #1', '2020-11-04 17:02:48', '2020-11-04 17:02:48');
 
 --
 -- Indexes for dumped tables
@@ -814,7 +817,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `pro_cats`
 --
 ALTER TABLE `pro_cats`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ptcs`
@@ -862,7 +865,7 @@ ALTER TABLE `user_pins`
 -- AUTO_INCREMENT for table `wallets`
 --
 ALTER TABLE `wallets`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

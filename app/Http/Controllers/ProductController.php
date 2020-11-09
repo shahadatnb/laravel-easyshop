@@ -29,7 +29,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $cats = ProCat::all();
+        $cats = ProCat::where('status',1)->get();
         return view('admin.products.create',compact('cats'));
     }
 

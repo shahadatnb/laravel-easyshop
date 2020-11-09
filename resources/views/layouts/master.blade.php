@@ -67,6 +67,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{url('/products/create')}}">New Product</a>
             <a class="collapse-item" href="{{url('/products')}}">All Product</a>
+            <a class="collapse-item" href="{{url('/cats')}}">Product Category</a>
             <a class="collapse-item" href="{{url('/productDelevery')}}">Product Delevery</a>
           </div>
         </div>
@@ -116,6 +117,11 @@
         </div>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/order/myOrder') }}">
+          <i class="fas fa-fw fa-dollar-sign"></i>
+          <span>My Order List</span></a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/memberList') }}">
           <i class="fas fa-fw fa-user-plus"></i>

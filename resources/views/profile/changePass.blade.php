@@ -14,11 +14,11 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
           <h3 class="box-title">Enter current password and new password</h3>
         </div>
-        <div class="box-body">
+        <div class="card-body">
           {!! Form::open(['url' => 'changePass','class'=>'form-horizontal']) !!}
             <div class="form-group{{ $errors->has('CurrentPassword') ? ' has-error' : '' }}">
                 <label for="CurrentPassword" class="col-md-4 control-label">Current Password</label>
@@ -68,7 +68,7 @@
           {!! Form::close() !!}
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <div class="card-footer">
           Footer
         </div>
         <!-- /.box-footer-->

@@ -14,11 +14,11 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
           <h3 class="box-title">Your {{$walletName}} Balance {{ $balance }} Tk</h3>
         </div>
-        <div class="box-body">
+        <div class="card-body">
           <p>Transaction List</p>
           <table class="table">
             <tr>
@@ -45,7 +45,7 @@
             'Others'=>'Others'
           ];
         @endphp
-         <div class="box-footer">
+         <div class="card-footer">
            @include('layouts._message')
           <h3 class="box-title">Withdraw balance</h3>
           {!! Form::open(['route'=>'withdrawBalance','method'=>'POST']) !!}

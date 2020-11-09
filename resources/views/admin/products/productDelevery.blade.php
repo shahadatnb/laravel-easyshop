@@ -14,11 +14,11 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
           <h3 class="box-title">Order List</a></h3>
         </div>
-        <div class="box-body">
+        <div class="card-body">
          <table class="table">
                 <tr>
                   <th>Order No</th>
@@ -55,7 +55,7 @@
               </table>
           <div class="text-center">{{ $orders->links() }}</div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <div class="card-footer">
         </div>
         <!-- /.box-footer-->
       </div>

@@ -15,8 +15,8 @@
     <section class="content">
       {!! Form::open(['route'=>'products.store','method'=>'POST']) !!}
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
           @include('layouts._message')
           <div class="row">
             <div class="col-md-8">
@@ -32,11 +32,11 @@
             </div>
           </div>
         </div>
-        <div class="box-body">          
+        <div class="card-body">          
           
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <div class="card-footer">
           
         </div>
         <!-- /.box-footer-->

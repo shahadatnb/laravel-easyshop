@@ -19,9 +19,9 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-        <div class="box-body basic-style" style="background: #ddd">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
+        <div class="card-body basic-style" style="background: #ddd">
           <div class="hv-container">
             <div class="hv-wrapper">
 
@@ -30,8 +30,8 @@
 
                     <div class="hv-item-parent">
 
-                        <p class="simple-card text-center"><img width="50" src="{{ url('/') }}/public/admin/img/avatar1.png" alt=""><br> ID# {{ $members->id }} MC# {{ User::myChild($members->id) }} <br>{{ $members->name }} <br>
-                          {{-- <span>LT#{{ App\User::myChild($members->id, 1) }}</span> - <span>RT#{{ App\User::myChild($members->id, 2) }}</span> --}}
+                        <p class="simple-card text-center"><img width="50" src="{{ url('/') }}/public/admin/img/avatar1.png" alt=""><br> ID# {{ $members->id }} {{-- MC# {{ User::myChild($members->id) }} --}} <br>{{ $members->name }} <br>
+                          <span>LT#{{ App\User::myChildLR($members->id, 1) }}</span> - <span>RT#{{ App\User::myChildLR($members->id, 2) }}</span>
                         </p>
                     </div>
 
@@ -48,7 +48,7 @@
           
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <div class="card-footer">
           
         </div>
         <!-- /.box-footer-->

@@ -23,8 +23,8 @@
     <section class="content">
       {!! Form::model($product,['route'=>['products.update',$product->id],'method'=>'PUT', 'files' => true ]) !!}
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
           @include('layouts._message')
           <div class="row">
             <div class="col-md-12">
@@ -74,7 +74,7 @@
             </div>
           </div>
         </div>
-        <div class="box-body">          
+        <div class="card-body">          
               <img style="max-width: 200px" src="{{url('/public')}}/upload/product/{{$product->photo}}" alt="">
         {!! Form::close() !!}
         </div>

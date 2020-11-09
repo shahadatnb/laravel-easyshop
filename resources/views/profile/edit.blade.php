@@ -14,11 +14,11 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
           <h3 class="box-title">Update Your Profile</h3>
         </div>
-        <div class="box-body">
+        <div class="card-body">
           {!! Form::model($user,['url' => ['updateProfile'],'method'=>'POST','class'=>'form-horizontal']) !!}
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-4 control-label">Full Name</label>
@@ -99,7 +99,7 @@
           {!! Form::close() !!}
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <div class="card-footer">
           Footer
         </div>
         <!-- /.box-footer-->

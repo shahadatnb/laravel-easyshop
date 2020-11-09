@@ -13,12 +13,12 @@
     <!-- Main content -->
     <section class="content">
       <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
+      <div class="card shadow mb-4">
+        <div class="card-header with-border">
            @include('layouts._message')
           <h3 class="box-title">Send Money</h3>
         </div>
-        <div class="box-body">
+        <div class="card-body">
           {!! Form::open(['route'=>'sendMoney','method'=>'POST']) !!}
           <div class="row">
             <div class="col-md-4">
@@ -40,7 +40,7 @@
          {!! Form::close() !!}
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <div class="card-footer">
           <p>Transaction List</p>
           <table class="table">
             <tr>
