@@ -22,6 +22,7 @@
             <a href="{{url('/page',$item->id)}}"><img src="{{ url('/').'/public/upload/product/'.$item->photo}}" alt="{{$item->title}}" class="card-img-top"></a>
             @endif
             <div class="card-body">
+              <h4>Price: {{$item->price}} Tk</h4>
               @if($item->cat_id != null )
               <div class="meta-cat"><a href="#">{{ $item->cat->title }}</a></div>
               @endif
